@@ -57,6 +57,8 @@ let divisible x =
 let b = seq {998001..-1.. 1} |> Seq.filter(fun a -> palin (string a)) |> Seq.filter(fun a -> divisible a) |> Seq.take 1
 printfn "Result%A" b
 (*
+Split second to run
+
 913
 Other digit is 993
 seq [906609]
