@@ -1,4 +1,71 @@
 (*
+
+    Largest palindrome product
+    Submit
+
+    Problem 4
+    A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
+
+    Find the largest palindrome made from the product of two 3-digit numbers.
+*)
+
+let rec palin (x:string):bool = 
+    printfn "%A" x
+    if x.Length = 1 then 
+        true 
+    elif x.Length = 2  && x.[0] = x.[x.Length - 1] then
+        true 
+    else 
+        // Check first and last
+        if x.[0] <> x.[x.Length - 1] then 
+            false 
+        else 
+            palin x.[1..x.Length - 2] 
+            
+
+printfn "%A" (palin "3301033")
+
+
+// Divisible by two 3 digit numbers
+let divisible x = 
+    let rec divisible_inner (x:int) (acc:int): bool = // 9999 91 
+        if acc.ToString().Length  > 3 then 
+            false 
+        else 
+            let remainder =  x % acc 
+    
+            if remainder = 0 && acc.ToString().Length = 3 then
+                let otherDigit = x / acc
+
+                if otherDigit.ToString().Length = 3 then
+
+                    if otherDigit * acc = x then
+                        printfn "%A" acc
+                        printfn "Other digit is %A" otherDigit
+                        true 
+                    else 
+                        divisible_inner x (acc + 1)
+                else 
+                    divisible_inner x (acc + 1) 
+            else 
+                divisible_inner x (acc + 1)
+    
+    divisible_inner x 100
+
+
+
+let b = seq {998001..-1.. 1} |> Seq.filter(fun a -> palin (string a)) |> Seq.filter(fun a -> divisible a) |> Seq.take 1
+printfn "Result%A" b
+(*
+913
+Other digit is 993
+seq [906609]
+*)
+
+
+
+
+(*
 Largest prime factor
 Problem 3
 The prime factors of 13195 are 5, 7, 13 and 29.
