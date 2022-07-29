@@ -1,3 +1,46 @@
+(*
+Largest prime factor
+Problem 3
+The prime factors of 13195 are 5, 7, 13 and 29.
+
+What is the largest prime factor of the number 600851475143 ?
+*)
+let isPrime i =
+    let rec isPrime_inner x acc:bool = 
+        if x = 1L then 
+            true 
+        elif acc = x then 
+            true 
+        else 
+            if x % acc = 0L then 
+                false 
+            else 
+                isPrime_inner x (acc + 1L)
+    isPrime_inner i 2L
+
+
+let largestPrimeFactor i = 
+    let rec largestPrimeFactor_inner x acc =
+        if x = 1L || x = acc then 
+          acc 
+        elif isPrime acc then 
+            if x % acc = 0L then 
+                largestPrimeFactor_inner (x/acc) (acc + 1L)
+            else 
+                largestPrimeFactor_inner (x) (acc + 1L)
+        else 
+            largestPrimeFactor_inner (x) (acc + 1L)
+    largestPrimeFactor_inner i 1L
+            
+let result = largestPrimeFactor 600851475143L
+
+printfn "%A" result
+//6857 
+// Took about 10 seconds to run
+
+
+
+
 
 (*
 Problem 1
