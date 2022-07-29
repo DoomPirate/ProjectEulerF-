@@ -1,4 +1,28 @@
 (*
+Smallest multiple
+Problem 5
+2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+
+What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+*)
+let isDivisible i max =
+    let rec isDivisible_inner x acc max =
+        if max = acc then 
+            true 
+        elif x % acc = 0 then 
+            isDivisible_inner x (acc + 1) max
+        else
+            false
+    isDivisible_inner i 1 max
+
+
+let a = Seq.initInfinite(fun a -> a) |> Seq.filter(fun b -> b > 0) |> Seq.filter(fun c -> isDivisible c 20) |> Seq.take 1
+//232792560
+// 15 seconds
+printfn "%A" a
+
+
+(*
 
     Largest palindrome product
     Submit
