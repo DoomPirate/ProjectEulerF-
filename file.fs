@@ -1,5 +1,38 @@
 
 (*
+
+10001st prime
+Problem 7
+By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
+
+What is the 10 001st prime number?
+*)
+let isPrime i =
+    let rec isPrime_inner x acc:bool = 
+        if x = 1L then 
+            true 
+        elif acc = x then 
+            true 
+        else 
+            if x % acc = 0L then 
+                false 
+            else 
+                isPrime_inner x (acc + 1L)
+    isPrime_inner i 2L
+
+
+
+let a = Seq.initInfinite(fun a -> a) 
+        |> Seq.filter(fun c -> c > 1) 
+        |> Seq.filter(fun b -> isPrime b) 
+        |> Seq.take 10001
+        |> List.ofSeq
+        |> List.rev
+        |> List.head
+printfn "%A" a
+
+
+(*
 Sum square difference
 Problem 6
 The sum of the squares of the first ten natural numbers is,
