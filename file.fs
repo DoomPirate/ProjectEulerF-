@@ -1,5 +1,41 @@
 
 (*
+Special Pythagorean triplet
+Problem 9
+A Pythagorean triplet is a set of three natural numbers, a < b < c, for which,
+
+a2 + b2 = c2
+For example, 32 + 42 = 9 + 16 = 25 = 52.
+
+There exists exactly one Pythagorean triplet for which a + b + c = 1000.
+Find the product abc.
+*)
+// Split second
+1 
+|> Seq.unfold(fun a -> 
+      if a < 1000 then 
+        let mySeq = 
+            a 
+            |> Seq.unfold(fun b -> 
+                if b < 1000 then 
+                    let c = 1000 - a - b          
+                    Some((a,b,c) , b + 1)
+                else 
+                    None
+                
+                    )
+        Some((a,mySeq), a + 1)
+      else 
+        None)
+|> Seq.collect(fun a -> snd a)
+|> Seq.filter(fun (a,b,c) -> c > b && b > a )
+|> Seq.filter(fun (a,b,c) -> a * a + b * b = c * c )
+|> Seq.take 1
+|> Seq.map(fun (a,b,c) -> a * b * c )
+|> Seq.head
+|> printfn "%A"
+  
+(*
 
 10001st prime
 Problem 7
