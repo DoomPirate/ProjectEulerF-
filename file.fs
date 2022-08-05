@@ -1,3 +1,17 @@
+(*
+215 = 32768 and the sum of its digits is 3 + 2 + 7 + 6 + 8 = 26.
+
+What is the sum of the digits of the number 21000?
+
+*)
+// Split second
+
+(bigint 2 ** 1000)
+|> string 
+|> Array.ofSeq
+|> Array.map (string >> int)
+|> Array.sum
+|> printfn "%A"
 
 (*
 The four adjacent digits in the 1000-digit number that have the greatest product are 9 × 9 × 8 × 9 = 5832.
