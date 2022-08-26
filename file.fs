@@ -81,6 +81,9 @@ let factorCount (i:int64) =
 |> printfn "%A"
 
 //76576500
+// ~ 5 seconds
+
+
 
 
 
